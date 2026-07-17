@@ -1,0 +1,11 @@
+{
+  "defaultProfile": "dev",
+  "profiles": [
+    {
+      "name": "dev",
+      "baseUrl": "https://dev317549.service-now.com/",
+      "username": "admin",
+      "password": "cq0NvuMJJ7/!"
+    }
+  ]
+}

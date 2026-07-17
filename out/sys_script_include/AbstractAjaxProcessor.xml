@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<record table="sys_script_include">
+    <field name="client_callable">true</field>
+    <field name="access">public</field>
+    <field name="mobile_callable">false</field>
+    <field name="sys_mod_count">31</field>
+    <field name="active">true</field>
+    <field name="description">Base ajax processor class that other ajax processors extend</field>
+    <field name="sys_updated_on">2014-06-25 03:05:38</field>
+    <field name="sys_tags"></field>
+    <field name="sandbox_callable">true</field>
+    <field name="script">// Base ajax processor class that other ajax processors extend
+// 
+// note that some methods return Java values, not JavaScript values
+
+var AbstractAjaxProcessor = Class.create();
+
+AbstractAjaxProcessor.prototype = {
+    CALLABLE_PREFIX : 'ajaxFunction_',
+
+    initialize : function(request, responseXML, gc) {
+        this.request = request;
+        this.responseXML = responseXML;
+        this.gc = gc;
+    },
+
+    process : function() {
+        var functionName = this.getName();
+        if (!functionName)
+            return;
+
+        if (functionName.indexOf('_') == 0)
+            return;
+        
+        var f = this[functionName];
+        if (!f) {         
+            functionName = this.CALLABLE_PREFIX + functionName;
+            var f = this[functionName];
+            if (!f)
+                return;
+        }
+        if (typeof f != 'function')
+            return;
+
+        return f.call(this);
+    },
+
+    newItem: function(name) {
+        if (!name)
+            name = &quot;item&quot;;
+
+        var item = this.getDocument().createElement(name);
+        this.getRootElement().appendChild(item);
+        return item;
+    },
+
+    // returns value of parameter as a Java String instance
+    getParameter: function(name) {
+        return this.request.getParameter(name)
+    },
+
+    getDocument: function() {
+        return this.responseXML;
+    },
+
+    getRootElement: function() {
+        return this.responseXML.getDocumentElement();
+    },
+
+    // returns value of &quot;sysparm_name&quot; as a Java String instance
+    getName: function() {
+        return this.getParameter(&quot;sysparm_name&quot;);
+    },
+
+    // returns value of &quot;sysparm_value&quot; as a Java String instance
+    getValue: function() {
+        return this.getParameter(&quot;sysparm_value&quot;);
+    },
+
+    // returns value of &quot;sysparm_type&quot; as a Java String instance
+    getType: function() {
+        return this.getParameter(&quot;sysparm_type&quot;);
+    },
+
+    getChars: function() {
+        return this.getParameter(&quot;sysparm_chars&quot;);
+    },
+
+    setAnswer: function(value) {
+        this.getRootElement().setAttribute(&quot;answer&quot;, value);
+    },
+
+    setError: function(error) {
+        this.getRootElement().setAttribute(&quot;error&quot;, error);
+    },
+
+    type: &quot;AbstractAjaxProcessor&quot;
+}</field>
+    <field name="sys_class_name">sys_script_include</field>
+    <field name="sys_id">d65f78c40a0a0b6900196656f35913d3</field>
+    <field name="sys_package">[object Object]</field>
+    <field name="sys_update_name">sys_script_include_d65f78c40a0a0b6900196656f35913d3</field>
+    <field name="sys_updated_by">admin</field>
+    <field name="api_name">global.AbstractAjaxProcessor</field>
+    <field name="sys_created_on">2009-06-12 21:28:49</field>
+    <field name="caller_access"></field>
+    <field name="name">AbstractAjaxProcessor</field>
+    <field name="sys_name">AbstractAjaxProcessor</field>
+    <field name="sys_scope">[object Object]</field>
+    <field name="sys_created_by">glide.maint</field>
+    <field name="sys_policy"></field>
+</record>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<record table="sys_script_include" name="global">
+  <sys_id>placeholder</sys_id>
+  <name>global</name>
+  <artifact_type>sys_script_include</artifact_type>
+  <source>ServiceNowArtifactExporter</source>
+</record>
