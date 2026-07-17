@@ -1,0 +1,11 @@
+{
+  "defaultProfile": "dev",
+  "profiles": [
+    {
+      "name": "dev",
+      "baseUrl": "https://your-instance.service-now.com",
+      "username": "your_username",
+      "password": "your_password"
+    }
+  ]
+}
